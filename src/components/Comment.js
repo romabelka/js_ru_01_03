@@ -1,17 +1,15 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 
-class Comment extends Component {
-    static propTypes = {
-        comment: PropTypes.object
-    };
+const Comment = (props) => {
+    return (
+        <div>
+            <p>{props.comment.text}</p>
+        </div>
+    )
+};
 
-    render() {
-        return (
-            <div>
-                <p>{this.props.comment.text}</p>
-            </div>
-        )
-    }
-}
+Comment.propTypes = {
+    comment: PropTypes.object
+};
 
-export default Comment
+export default Comment;
