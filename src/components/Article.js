@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import {findDOMNode} from 'react-dom'
 import CommentList from './CommentList'
+import BodyTitle from '../HOC/articleBodyTitle'
 
 class Article extends Component {
     static propTypes = {
@@ -9,7 +10,7 @@ class Article extends Component {
     }
 
 
-    componentWillMount() {
+  /*  componentWillMount() {
         console.log('---', 'going to mount');
     }
 
@@ -19,36 +20,20 @@ class Article extends Component {
 
     componentDidUpdate() {
         console.log('---', 'comments', findDOMNode(this.refs.comments));
-    }
+    }*/
 
     render() {
+        console.log(isOpen);
+        const { isOpen, article,openArticle,getTitle,getBody } = this.props
         return (
-            <div ref="container">
-                <a href = "#" onClick = {this.props.openArticle}>select</a>
-                {this.getTitle()}
-                {this.getBody()}
+            <div ref="container" >
+                <a href = "#" onClick = {openArticle}>select</a>
+                {getTitle()}
+                {getBody(CommentList)}
             </div>
         )
     }
 
-    getBody() {
-        const { article, isOpen } = this.props
-        if (!isOpen) return <noscript />
-        return (
-            <div>
-                <p>{article.text}</p>
-                <CommentList ref= "comments" comments = {article.comments || []} />
-            </div>
-        )
-    }
-    getTitle() {
-        const { article: { title }, openArticle  } = this.props
-        return  (
-            <h3 onClick={openArticle}>
-                {title}
-            </h3>
-        )
-    }
 }
 
-export default Article
+export default BodyTitle(Article)
