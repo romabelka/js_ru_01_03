@@ -1,39 +1,47 @@
 import React, { Component, PropTypes } from 'react'
 import {findDOMNode} from 'react-dom'
 import CommentList from './CommentList'
-import BodyTitle from '../HOC/articleBodyTitle'
-
+import { deleteArticle } from '../actions/articles'
 class Article extends Component {
     static propTypes = {
         isOpen: PropTypes.bool,
         article: PropTypes.object.isRequired
     }
 
-
-  /*  componentWillMount() {
-        console.log('---', 'going to mount');
-    }
-
-    componentDidMount() {
-        console.log('---', 'mounted to: ', this.refs.container);
-    }
-
-    componentDidUpdate() {
-        console.log('---', 'comments', findDOMNode(this.refs.comments));
-    }*/
-
     render() {
-        console.log(isOpen);
-        const { isOpen, article,openArticle,getTitle,getBody } = this.props
         return (
-            <div ref="container" >
-                <a href = "#" onClick = {openArticle}>select</a>
-                {getTitle()}
-                {getBody(CommentList)}
+            <div ref="container">
+                <a href = "#" onClick = {this.handleDelete}>delete</a>
+                {this.getTitle()}
+                {this.getBody()}
+
             </div>
         )
     }
 
+    handleDelete = (ev) => {
+        ev.preventDefault()
+        deleteArticle(this.props.article.id)
+    }
+
+    getBody() {
+        const { article, isOpen } = this.props
+        if (!isOpen) return <noscript />
+        return (
+            <div>
+                <p>{article.text}</p>
+                <CommentList ref= "comments" article={article} comments = {article.getRelation('comments')} />
+            </div>
+        )
+    }
+    getTitle() {
+        const { article: { title }, openArticle  } = this.props
+        return  (
+            <h3 onClick={openArticle}>
+                {title}
+            </h3>
+        )
+    }
 }
 
-export default BodyTitle(Article)
+export default Article
