@@ -31,6 +31,7 @@ const CommentList = React.createClass({
         )
     },
     addCommentHandler(ev){
+        //можно просто this.state.comment
         const addCommentValue = this.linkState("comment");
         ev.preventDefault()
         addComment(this.articleId, addCommentValue.value);
