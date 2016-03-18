@@ -22,6 +22,7 @@ class ArticleStore extends SimpleStore {
                         "text": data.value
                     })
                     /* Вопрос, вы говорили что не стоит испозовать push, вот этом месте тоже не стоит использовать? */
+                    //да, сторы могут менять только себя. добавление коммента должно происходить в коммент-сторе
                     this.getById(data.articleId).comments.push(commentsSize);
                     this.emitChange()
                     break;
