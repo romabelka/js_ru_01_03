@@ -14,6 +14,7 @@ class ArticleStore extends SimpleStore {
                     this.emitChange()
                     break;
                 case ADD_COMMENT:
+                    //слабое решение, length очень быстро приведет вас к проблеме неуникальных id
                     const commentsSize = stores.comments.__items.length;
                     stores.comments.__add({
                         "id": commentsSize,
