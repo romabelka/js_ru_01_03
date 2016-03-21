@@ -17,6 +17,7 @@ class Comment extends SimpleStore {
                     })
                     break;
                 case LOAD_ALL_COMMENTS_BY_ARTICLE + _SUCCESS:
+                    //stores.comments почему не this?
                     response.forEach(stores.comments.__add);
                     break;
 
