@@ -18,7 +18,8 @@ class Comment extends SimpleStore {
                     break;
                 case LOAD_ALL_COMMENTS_BY_ARTICLE + _SUCCESS:
                     //stores.comments почему не this?
-                    response.forEach(stores.comments.__add);
+                    //было не this потому что этот обработчик скорее всего изначально был в articlestore
+                    response.forEach(this.__add);
                     break;
 
             }
