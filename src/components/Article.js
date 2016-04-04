@@ -1,31 +1,64 @@
-import React, { Component, PropTypes } from 'react'
+import React, {Component, PropTypes} from 'react'
 import {findDOMNode} from 'react-dom'
 import CommentList from './CommentList'
-import { deleteArticle, loadArticleById } from '../actions/articles'
-import { loadCommentsById,addComment } from '../actions/comments'
+import {deleteArticle, loadArticleById} from '../actions/articles'
+import undersScore from "underscore"
+
+
+
+function isEqual(obj1, obj2) {
+    //todo implement
+    return false
+}
 
 class Article extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            localization: {}
+        }
+    }
+
+    static contextTypes = {
+        localization: PropTypes.object,
+        thisLang: PropTypes.string
+    }
     static propTypes = {
         isOpen: PropTypes.bool,
         article: PropTypes.object.isRequired
     }
 
-    componentWillReceiveProps(nextProps) {
-        const { article, isOpen } = nextProps
-        if (article.loaded || article.loading) return
+    componentWillMount() {
+        this.setState({
+            localization: this.context.localization[this.context.thisLang]
+        })
+    }
 
-        if (isOpen && !this.props.isOpen) loadArticleById({id: article.id})
+    componentWillUpdate(nextProps, nextState,context){
+        /* мне не нравится подобная реалиция подскажите как сделать граматно,
+         и как функции работающие с state  компонентов выносить, их лучше выносить например в HOC?
+         */
+        if (!undersScore.isEqual(nextState.localization, context.localization[context.thisLang])) {
+            this.setState({
+                localization: this.context.localization[this.context.thisLang]
+            })
+        };
     }
 
 
     render() {
         return (
             <div ref="container">
-                <a href="#" onClick={this.handleDelete}>delete</a>
+                <a href="#" onClick={this.handleDelete}>{this.state.localization.deleteArticle}</a>
                 {this.getTitle()}
                 {this.getBody()}
             </div>
         )
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return !isEqual(nextProps, this.props)
     }
 
     handleDelete = (ev) => {
@@ -34,9 +67,8 @@ class Article extends Component {
     }
 
     getBody() {
-        const { article, isOpen } = this.props
-        if (!isOpen) return <noscript />
-        if (article.loading) return <h3>Loading article</h3>
+        const {article, isOpen} = this.props
+        if (article.loading) return <h3>{this.state.localization.load}</h3>
         return (
             <div>
                 <p>{article.text}</p>
@@ -46,28 +78,20 @@ class Article extends Component {
     }
 
     getCommentList() {
-        const { article } = this.props
-        const comments = article.getRelation('comments');
-        if (article.loadingComment) return <h3>Loading comments</h3>
-        if (comments.includes(undefined)) return  <h3 onClick={this.getComments} >comments: {comments.length}</h3>
         return <CommentList ref="comments"
-                            comments={comments}
-                            addComment={this.addComment}/>
-
+                            article={this.props.article}
+        >
+            <h3>{this.state.localization.commentsForArticle} {this.props.article.id}</h3>
+        </CommentList>
     }
 
     addComment = (comment) => {
+       
         addComment(comment, this.props.article.id)
     }
 
-    getComments = () => {
-        const { article } = this.props;
-        if(!article.comments.loadedComment) loadCommentsById({id: this.props.article.id})
-    }
-
-
     getTitle() {
-        const { article: { title }, openArticle  } = this.props
+        const {article: {title}, openArticle} = this.props
         return (
             <h3 onClick={openArticle}>
                 {title}

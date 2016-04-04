@@ -1,16 +1,22 @@
 import React, { Component, PropTypes } from 'react'
+import { Link } from 'react-router'
 import Article from './Article'
 import CommentList from './CommentList'
 import oneOpen from '../HOC/oneOpen'
 
 class ArticleList extends Component {
+
+    static contextTypes = {
+        user: React.PropTypes.string,
+        localization: PropTypes.object,
+        thisLang: PropTypes.string
+    }
+
     render() {
         const { articles, isItemOpen, openItem } = this.props
         const articleItems = articles.map((article) =>
             <li key={article.id}>
-                <Article article={article}
-                         openArticle = {openItem(article.id)}
-                         isOpen = {isItemOpen(article.id)}/>
+                <Link to={`/articles/${article.id}`}>{article.title}</Link>
             </li>
         )
         return (
@@ -23,5 +29,6 @@ class ArticleList extends Component {
     }
 
 }
+
 
 export default oneOpen(ArticleList)
