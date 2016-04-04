@@ -2,7 +2,7 @@ import routes from './routes'
 import ReactDOM from 'react-dom'
 import React from 'react'
 
-
+//это все просто поиграть с контекстом, как я понимаю?
 var Grandparent = React.createClass({
     childContextTypes: {
         name: React.PropTypes.string.isRequired
