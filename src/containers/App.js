@@ -32,10 +32,12 @@ class App extends Component {
     }
 
     componentWillMount() {
+        //почему не вынести в конструктор?
         this.setState({
             thisLang: localizationStore.getCurrentLang(),
             lang: localization[localizationStore.getCurrentLang()],
         })
+        //а вот это совсем плохо, нельзя так прямо менять стейт, для этого setState есть
         this.state.langList = Object.keys(localization);
         changeLang(this.state.thisLang);
     }
