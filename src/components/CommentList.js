@@ -15,6 +15,11 @@ const CommentList = React.createClass({
             comment: ''
         }
     },
+
+    contextTypes: {
+        user: PropTypes.string
+    },
+
     componentWillReceiveProps(nextProps) {
         const { article, isOpen } = nextProps
         if (article.loadedComments || article.loadingComments) return
@@ -47,13 +52,15 @@ const CommentList = React.createClass({
         if (!isOpen) return null
         if (article.loadingComments) return <h3>{translate('loading')}</h3>
         if (!article.loadedComments) return null
-        const commentItems = article.getRelation('comments').map((comment) => <li key={comment.id}><Comment comment = {comment}/></li>)
+        const commentItems = article.getRelation('comments').map((comment) =>
+            <li key={comment.id}><Comment comment = {comment}/></li>
+        )
         return <ul>{commentItems}</ul>
     },
 
     addComment(ev) {
         ev.preventDefault()
-        addComment(this.state.comment, this.props.article.id)
+        addComment(this.state.comment, this.context.user, this.props.article.id)
         this.setState({
             comment: ''
         })

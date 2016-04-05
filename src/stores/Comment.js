@@ -16,6 +16,7 @@ class Comment extends SimpleStore {
                 case ADD_COMMENT:
                     this.__add({
                         text: data.comment,
+                        user: data.user,
                         id: this.generateId()
                     })
                     break;

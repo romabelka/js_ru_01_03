@@ -4,10 +4,10 @@ import { loadForArticle, loadForPage } from './api/comments'
 import { asyncAC } from './api/utils'
 import history  from '../history'
 
-export function addComment(comment, articleId) {
+export function addComment(comment, user, articleId) {
     AppDispatcher.dispatch({
         type: ADD_COMMENT,
-        data: {comment, articleId}
+        data: { comment, articleId, user }
     })
 //    history.replace('/articles/new')
 }
