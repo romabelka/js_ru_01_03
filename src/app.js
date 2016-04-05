@@ -1,9 +1,12 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
 import store from './store'
-import Counter from './components/Counter'
-import { increment } from './actions/counter'
+import Root from './containers/Root'
 
+ReactDOM.render(<Root store = {store} />, document.getElementById('container'))
+
+
+/*
 const wrappedIncrement = () => store.dispatch(increment())
 
 function rerender() {
@@ -13,4 +16,4 @@ function rerender() {
 
 rerender()
 
-store.subscribe(rerender)
+store.subscribe(rerender)*/
