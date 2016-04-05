@@ -2,14 +2,15 @@ import React, { Component, PropTypes } from 'react'
 
 class Counter extends Component {
     static propTypes = {
-        count: PropTypes.number
+        count: PropTypes.number,
+        increment: PropTypes.func
     };
 
     render() {
-        const { count } = this.props
+        const { count, increment } = this.props
         return (
             <div>
-                <h1>{count}</h1>
+                <h1 onClick = {increment}>{count}</h1>
             </div>
         )
     }
