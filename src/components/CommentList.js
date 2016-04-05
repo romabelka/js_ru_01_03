@@ -53,7 +53,7 @@ const CommentList = React.createClass({
 
     addComment(ev) {
         ev.preventDefault()
-        addComment(this.props.article.id, this.state.comment)
+        addComment(this.state.comment, this.props.article.id)
         this.setState({
             comment: ''
         })
