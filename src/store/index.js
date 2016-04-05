@@ -1,7 +1,7 @@
 import { createStore } from 'redux'
-import counter from '../ruducers/counter'
+import reducer from '../ruducers'
 
-const store = createStore(counter)
+const store = createStore(reducer)
 window.store = store
 
 export default store
