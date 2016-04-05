@@ -1,17 +1,18 @@
 import React, { Component, PropTypes } from 'react'
 
-class NotFound extends Component {
+class Counter extends Component {
     static propTypes = {
-
+        count: PropTypes.number
     };
 
     render() {
+        const { count } = this.props
         return (
             <div>
-                <h1>Not Found</h1>
+                <h1>{count}</h1>
             </div>
         )
     }
 }
 
-export default NotFound
+export default Counter
