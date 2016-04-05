@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import ArticleList from '../components/ArticleList'
 import { articleStore, userStore } from '../stores'
 import { signIn } from '../actions/user'
+import translate from '../HOC/translate'
 
 class Articles extends Component {
     constructor() {
@@ -46,12 +47,13 @@ class Articles extends Component {
 
     render() {
         const { articles, loading } = this.state
+        const { translate, children } = this.props
         if (loading) return <h1>Loading...</h1>
         return (
             <div>
-                <h3 onClick = {this.goToNewArticle}>New Article</h3>
+                <h3 onClick = {this.goToNewArticle}>{translate('create new article')}</h3>
                 <input value={this.state.name} onChange = {this.changeName}/>
-                <a href="#" onClick = {this.signIn} >sign in</a>
+                <a href="#" onClick = {this.signIn} >{translate('sign in')}</a>
                 <ArticleList articles = {articles}/>
                 {this.props.children}
             </div>
@@ -81,4 +83,4 @@ class Articles extends Component {
     }
 }
 
-export default Articles
+export default translate(Articles)

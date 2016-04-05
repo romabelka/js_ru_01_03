@@ -42,7 +42,6 @@ class ArticlePage extends Component {
     render() {
         return (
             <div>
-                article: {this.props.params.id}
                 <Article article={this.state.article} />
             </div>
         )

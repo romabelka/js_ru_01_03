@@ -12,7 +12,6 @@ class Comment extends Component {
     render() {
         return (
             <div>
-                current user: {this.context.user}
                 <p>{this.props.comment.text}</p>
             </div>
         )

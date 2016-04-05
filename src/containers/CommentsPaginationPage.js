@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import {commentStore} from '../stores'
+import translate from '../HOC/translate'
 
 class CommentsPaginationPage extends Component {
     static propTypes = {
@@ -38,7 +39,7 @@ class CommentsPaginationPage extends Component {
 
     render() {
         const { loading, loaded, comments } = this.state
-        if (!loaded || loading) return <h1>Loading</h1>
+        if (!loaded || loading) return <h1>{this.props.translate('loading')}</h1>
         if (!comments.length) return <h1>Sorry, no comments here</h1>
         const commentItems = comments.map(comment =>
             <li key = {comment.id}>{comment.text}</li>
@@ -53,4 +54,4 @@ class CommentsPaginationPage extends Component {
     }
 }
 
-export default CommentsPaginationPage
+export default translate(CommentsPaginationPage)
