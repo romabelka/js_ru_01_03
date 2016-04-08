@@ -14,7 +14,8 @@ class Articles extends Component {
 
     render() {
         const { articles } = this.props
-        const items = articles.map((article) =>
+        if (articles.loading) return <h1>Loading</h1>
+        const items = articles.entities.map((article) =>
             <li key = {article.id}>
                 <Article article={article} />
                 <a href="#" onClick = {this.handleDelete(article.id)}> delete this article</a>
