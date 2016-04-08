@@ -1,20 +1,14 @@
 import React, { Component, PropTypes } from 'react'
-import Counter from './Counter'
-import Articles from './Articles'
 import { Provider } from 'react-redux'
-import DevTools from './DevTools'
+import DevTools from './../containers/DevTools'
+import store from '../store'
 
 class Root extends Component {
-    static propTypes = {
-        store: PropTypes.object
-    };
-
     render() {
         return (
-            <Provider store={this.props.store}>
+            <Provider store={store}>
                 <div>
-                    <Counter />
-                    <Articles />
+                    {this.props.children}
                     <DevTools />
                 </div>
             </Provider>

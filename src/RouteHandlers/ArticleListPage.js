@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react'
+import Counter from './../containers/Counter'
+import Articles from './../containers/Articles'
 
 class ArticleListPage extends Component {
     static propTypes = {
@@ -9,6 +11,7 @@ class ArticleListPage extends Component {
         return (
             <div>
                 <h1>Article List Page</h1>
+                <Articles />
                 {this.props.children}
             </div>
         )
