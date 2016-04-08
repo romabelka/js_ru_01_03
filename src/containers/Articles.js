@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { deleteArticle } from '../actions/articles'
+import Article from '../components/Article'
 
 class Articles extends Component {
     static propTypes = {
@@ -11,8 +12,7 @@ class Articles extends Component {
         const { articles } = this.props
         const items = articles.map((article) =>
             <li key = {article.id}>
-                {article.title}
-                |
+                <Article article={article} />
                 <a href="#" onClick = {this.handleDelete(article.id)}> delete this article</a>
             </li>
         )

@@ -1,10 +1,11 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import reducer from '../ruducers'
-import logger from '../middlewares/logger'
+//import logger from '../middlewares/logger'
 import DevTools from '../containers/DevTools'
+import createLogger from 'redux-logger'
 
 const enhancer = compose(
-    applyMiddleware(logger),
+    applyMiddleware(createLogger()),
     DevTools.instrument()
 )
 
