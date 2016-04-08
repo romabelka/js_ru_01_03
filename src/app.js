@@ -2,8 +2,10 @@ import ReactDOM from 'react-dom'
 import React from 'react'
 import store from './store'
 import Root from './containers/Root'
+import routes from './routes'
 
-ReactDOM.render(<Root store = {store} />, document.getElementById('container'))
+//ReactDOM.render(<Root store = {store} />, document.getElementById('container'))
+ReactDOM.render(routes, document.getElementById('container'))
 
 
 /*
