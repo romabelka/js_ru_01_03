@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import CommentList from './CommentList'
+import CommentList from './../CommentList'
+require('./style.css')
 
 class Article extends Component {
     static propTypes = {
@@ -9,7 +10,7 @@ class Article extends Component {
     render() {
         const { article } = this.props
         return (
-            <div>
+            <div class="article">
                 <h3>{article.title}</h3>
                 <CommentList article = {article} />
             </div>

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { deleteArticle, loadAllArticles, loadAllArticlesFluxStyle } from '../actions/articles'
-import Article from '../components/Article'
+import Article from '../components/Article/index'
 
 class Articles extends Component {
     static propTypes = {
