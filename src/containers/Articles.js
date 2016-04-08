@@ -1,12 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { deleteArticle } from '../actions/articles'
+import { deleteArticle, loadAllArticles } from '../actions/articles'
 import Article from '../components/Article'
 
 class Articles extends Component {
     static propTypes = {
 
     };
+
+    componentDidMount() {
+        this.props.loadAllArticles()
+    }
 
     render() {
         const { articles } = this.props
@@ -33,5 +37,5 @@ export default connect((state) => {
     const { articles } = state
     return { articles }
 }, {
-    deleteArticle
+    deleteArticle, loadAllArticles
 })(Articles)
